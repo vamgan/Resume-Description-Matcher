@@ -11,7 +11,7 @@ from spacy.tokens import Span
 from spacy.matcher import PhraseMatcher
 import sys
 import pandas as pd
-import seaborn as sns
+
 
 #Add your resume path
 mypath='./Vamil_Gandhi_Resume(CMU).pdf'
