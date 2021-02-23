@@ -1,4 +1,4 @@
-# Resume-Description-Matcher 
+# Resume-Description-Matcher using spaCy
 
 Matching your resume with the job description input and returning a table with all the skills required for job and frequency of the skills found on your resume. It will also tell you the percentage match with your resume.⭐️
 
@@ -13,5 +13,5 @@ Matching your resume with the job description input and returning a table with a
 ### Used libraries
 
 1. PyPDF2 - To read pdf resume.
-2. Spacy - Used PhraseMatcher() for NLP word matching.
+2. spaCy - Used PhraseMatcher() for NLP word matching.
 3. Pandas - To genearte table.
