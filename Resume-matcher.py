@@ -11,7 +11,7 @@ from spacy.tokens import Span
 from spacy.matcher import PhraseMatcher
 import sys
 import pandas as pd
-
+matcher = PhraseMatcher(nlp.vocab)
 
 #Add your resume path
 mypath='./Vamil_Gandhi_Resume(CMU).pdf'
@@ -38,14 +38,14 @@ def read_skill():
 def job_desc_profile():
     job_skill = read_skill()
     job_desc = sys.stdin.read()
-    job_desc.lower()
-    job_skill = [nlp.make_doc(text.lower()) for text in job_skill]
-    matcher = PhraseMatcher(nlp.vocab)
+    job_desc = job_desc.lower()
+    job_skill = [nlp.make_doc(text.lower().strip()) for text in job_skill]
+    
     
     matcher.add('Job skill dict',job_skill)
 
-
     doc = nlp(job_desc)
+    print(doc)
     matches = matcher(doc)
     match_words_dic = {}
     for match_id, start, end in matches:
@@ -53,18 +53,17 @@ def job_desc_profile():
         #doc.ents = list(doc.ents) + [span]
         if span.text not in match_words_dic:
             match_words_dic[span.text.lower()] = 0
-    
+    print(match_words_dic)
     return match_words_dic
 
 def create_job_profile(file):
     match_words = job_desc_profile()
     text = pdfextract(file) 
     text = str(text)
-    text = text.replace("\\n", "")
+    text = text.strip()
     text = text.lower()
 
-    job_skill = [nlp.make_doc(text.lower()) for text in match_words ]
-    matcher = PhraseMatcher(nlp.vocab)
+    job_skill = [nlp.make_doc(text.lower()) for text in match_words]
     
     matcher.add('Jobs found in desc',job_skill)
 
